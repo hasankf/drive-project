@@ -6,6 +6,11 @@ const { v4: uuidv4 } = require('uuid');
 const authMiddleware = require('../middlewares/auth')
 const fileModel = require('../models/files.model')
 
+
+router.get('/', (req, res) => {
+  res.render('index');   // landing or login
+});
+
 router.get('/home', authMiddleware,async (req, res) => {
 
   const userFiles = await fileModel.find({
