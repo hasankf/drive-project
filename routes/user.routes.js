@@ -55,11 +55,11 @@ router.post('/register',
             password: hashPassword // earlier it was password now hashPassword
         })
         // put it in json format, the newuser
-        res.json(newUser)
+        // res.json(newUser)  // do i change it here? 
         
 
     console.log(req.body)//saara data ismein aayega
-    res.send("User registered");
+    res.redirect('/user/login')
 })
 
 
@@ -128,7 +128,7 @@ router.post('/login',
     )
         // token and then token
         res.cookie('token', token)
-        res.send('Logged in');
+        res.redirect('/home');
     }
 )
 
