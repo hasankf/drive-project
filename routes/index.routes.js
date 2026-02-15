@@ -8,7 +8,7 @@ const fileModel = require('../models/files.model')
 
 
 router.get('/', (req, res) => {
-  res.render('index');   // landing or login
+  res.render('register');   // landing or login
 });
 
 router.get('/home', authMiddleware,async (req, res) => {
