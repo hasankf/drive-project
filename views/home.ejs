@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Flowbite -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Remix Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.8.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="bg-gray-800">
+    <main class="p-6 h-screen w-screen">
+      <!-- Trigger button -->
+      <button
+        onclick="showPopUp()"
+        class="bg-blue-600 text-white font-bold py-2 px-4 rounded"
+      >
+        upload file
+      </button>
+
+      <!-- POPUP -->
+      <div
+        class="pop hidden fixed inset-0 flex items-center justify-center bg-black/60"
+      >
+        <!-- CARD -->
+        <div class="relative">
+          <!-- ❌ CLOSE BUTTON -->
+          <button
+            class="absolute top-3 right-3 z-50 bg-gray-900 text-white rounded-full p-2 hover:bg-gray-700"
+            onclick="hidePopUp()"
+          >
+            <i class="ri-close-line text-xl"></i>
+          </button>
+
+          <!-- FORM -->
+          <form
+            action="/upload"
+            method="post"
+            enctype="multipart/form-data"
+            class="bg-gray-700 rounded-lg p-6"
+          >
+            <div class="flex items-center justify-center w-96">
+              <label
+                for="dropzone-file"
+                class="flex flex-col items-center justify-center w-full h-64 border border-dashed border-gray-400 rounded-lg cursor-pointer hover:bg-gray-600"
+              >
+                <div
+                  class="flex flex-col items-center justify-center text-center pt-5 pb-6 text-gray-200 pointer-events-none"
+                >
+                  <svg
+                    class="w-8 h-8 mb-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 17h3a3 3 0 0 0 0-6h-.025a5.56 5.56 0 0 0 .025-.5A5.5 5.5 0 0 0 7.207 9.021C7.137 9.017 7.071 9 7 9a4 4 0 1 0 0 8h2.167M12 19v-9m0 0-2 2m2-2 2 2"
+                    />
+                  </svg>
+
+                  <p class="mb-2 text-sm">
+                    <span class="font-semibold">Click to upload</span> or drag
+                    and drop
+                  </p>
+                  <p class="text-xs">
+                    SVG, PNG, JPG or GIF (MAX. 800x400px)
+                  </p>
+                </div>
+
+                <input
+                  id="dropzone-file"
+                  type="file"
+                  class="hidden"
+                  name="file"
+                  accept="application/pdf"
+                />
+              </label>
+            </div>
+
+            <button
+              class="mt-4 bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
+            >
+              Upload file
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="files mt-4 flex flex-col gap-2">
+        <%files.forEach((file)=> {%>
+          <div class="p-2 cursor-pointer rounded-md bg-gray-300 flex justify-between">
+            <h1><%=file.originalname%></h1>
+            <a 
+              href="/download/<%=file._id%>" 
+              class=""
+              download="<%=file.originalname%>">
+              <i class="ri-arrow-down-line"></i>
+            </a>
+          </div>
+        <% }) %>
+      </div>
+    </main>
+
+    <!-- ❗ SCRIPT UNCHANGED -->
+    <script>
+      function showPopUp() {
+        document.querySelector(".pop").style.display = "flex";
+      }
+
+      function hidePopUp() {
+        document.querySelector(".pop").style.display = "none";
+      }
+    </script>
+  </body>
+</html>
